@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import AddEntityForm from '../common/add-entity-form';
-import ListOfTask from './list-of-task';
+import ListOfTasks from './list-of-tasks';
 
 export default class List extends Component {
   render() {
@@ -12,7 +12,7 @@ export default class List extends Component {
         </div>
 
         <div className="todo-list">
-          <ListOfTask tasks={[]} />
+          <ListOfTasks tasks={[]} />
         </div>
 
         <div className="delete-checked-wrapper">

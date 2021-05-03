@@ -49,5 +49,5 @@ export default class AddEntityForm extends Component {
 }
 
 AddEntityForm.propTypes = {
-  onSubmit: PropTypes.func.isRequred,
+  onSubmit: PropTypes.func.isRequired,
 };

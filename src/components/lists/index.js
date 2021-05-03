@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import AddEntityForm from '../common/add-entity-form';
-import ListOflists from './list-of-lists';
+import ListOfLists from './list-of-lists';
 import Loader from '../common/loader';
 
 import ActionStatus from '../../constants/action-status';
@@ -29,7 +29,7 @@ class Lists extends Component {
         </div>
 
         <div className="lists">
-          <ListOflists lists={lists} onDelete={deleteList} />
+          <ListOfLists lists={lists} onDelete={deleteList} />
         </div>
 
         {status === ActionStatus.LOADING && <Loader />}
