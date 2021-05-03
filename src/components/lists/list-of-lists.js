@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const ListOfLists = ({ lists, onDelete }) => (
   <ol>
     {lists.map((list) => (
       <li key={list.id}>
-        <a href="#">{list.name}</a>
+        <Link to={`/list/${list.id}`}>{list.name}</Link>
 
         <button className="edit-btn">
           <i className="fa fa-edit" aria-hidden="true" />

@@ -9,6 +9,7 @@ import Loader from '../common/loader';
 import ActionStatus from '../../constants/action-status';
 
 import { addList, deleteList, getLists } from '../../store/lists/actions';
+import EntityType from '../../constants/entity-type';
 
 class Lists extends Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ class Lists extends Component {
     return (
       <>
         <div className="add-form">
-          <AddEntityForm onSubmit={addList} />
+          <AddEntityForm onSubmit={addList} type={EntityType.LIST} />
         </div>
 
         <div className="lists">

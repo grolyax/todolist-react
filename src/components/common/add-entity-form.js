@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import EntityType from '../../constants/entity-type';
+
+const placeholderByEntityType = {
+  [EntityType.LIST]: 'Enter list name...',
+  [EntityType.TASK]: 'Enter task...',
+};
 
 export default class AddEntityForm extends Component {
   constructor() {
@@ -13,39 +19,41 @@ export default class AddEntityForm extends Component {
     });
   }
 
-    handleSubmit = (values, actions) => {
-      const { onSubmit } = this.props;
+  handleSubmit = (values, actions) => {
+    const { onSubmit } = this.props;
 
-      onSubmit(values);
+    onSubmit(values);
 
-      actions.resetForm();
-    }
+    actions.resetForm();
+  }
 
-    render() {
-      return (
-        <Formik
-          initialValues={{ name: '' }}
-          onSubmit={this.handleSubmit}
-          validationSchema={this.validationSchema}
-        >
-          {({ handleSubmit, handleChange, values }) => (
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="name"
-                placeholder="Enter list name..."
-                onChange={handleChange}
-                value={values.name}
-              />
+  render() {
+    const { type } = this.props;
 
-              <button type="submit">
-                <i className="fas fa-plus" />
-              </button>
-            </form>
-          )}
-        </Formik>
-      );
-    }
+    return (
+      <Formik
+        initialValues={{ name: '' }}
+        onSubmit={this.handleSubmit}
+        validationSchema={this.validationSchema}
+      >
+        {({ handleSubmit, handleChange, values }) => (
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder={placeholderByEntityType[type]}
+              onChange={handleChange}
+              value={values.name}
+            />
+
+            <button type="submit">
+              <i className="fas fa-plus" />
+            </button>
+          </form>
+        )}
+      </Formik>
+    );
+  }
 }
 
 AddEntityForm.propTypes = {

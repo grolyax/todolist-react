@@ -15,10 +15,38 @@
     {
       "name": "23",
       "id": 4
+    }
+  ],
+  "tasks": [
+    {
+      "name": "123",
+      "listId": "2",
+      "id": 1
     },
     {
-      "name": "list 2",
+      "name": "added",
+      "listId": "2",
+      "id": 2
+    },
+    {
+      "name": "456",
+      "listId": "2",
+      "id": 3
+    },
+    {
+      "name": "dfg",
+      "listId": "2",
+      "id": 4
+    },
+    {
+      "name": "redact",
+      "listId": "1",
       "id": 5
+    },
+    {
+      "name": "redact",
+      "listId": "1",
+      "id": 6
     }
   ]
 }

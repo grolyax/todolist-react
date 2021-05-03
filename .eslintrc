@@ -40,6 +40,8 @@
     "jsx-a11y/anchor-is-valid": "warn",
     "react/prop-types": "warn",
     "react/self-closing-comp": "warn",
-    "react/prefer-stateless-function": "warn"
+    "react/prefer-stateless-function": "warn",
+    "comma-dangle": "off",
+    "object-curly-newline": "off"
   }
 }
