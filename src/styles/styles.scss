@@ -1,0 +1,204 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    color: #a3d6ff;
+    text-shadow: 3px 3px 5px #050129;
+}
+
+body {
+    background: rgb(5,0,93);
+    background: linear-gradient(90deg, rgba(5,0,93,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+   
+    background: white;
+    padding: 24px;
+    height: 50vh;
+    overflow-y: auto;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px #050129;
+}
+
+.email-user {
+    text-align: end;
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+
+.home-btn {
+    color: gray;
+    font-size: 30px;
+}
+
+.add-form {
+    form {
+        display: flex;
+        margin-bottom: 20px;
+
+        input {
+            flex-grow: 1;
+            height: 32px;
+            border: none;
+            border-bottom: solid darkgrey 2px;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            margin-left: 10px;
+            width: 38px;
+            border: none;
+            background: #a3d6ff;
+            color: white;
+            border-radius: 5px;
+        }
+    }
+}
+
+.todo-list, .lists {
+    flex-grow: 1;
+    overflow-y: auto;
+    ol {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            display: flex;
+
+            span, a, input[type="text"] {
+                flex-grow: 1;
+            }
+            .delete-btn, .edit-btn {
+                border: none;
+                background: none;
+                
+            }
+
+            &.checked {
+                span, a {
+                    text-decoration: line-through;
+                }
+            }
+        }
+    }
+}
+
+
+.delete-checked {
+    &-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    }
+}
+
+.logout {
+    display: flex;
+    justify-content: space-between;
+}
+.logout, .logout-lists {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    .logout-btn {
+        width: 100px;
+        background-color: cornflowerblue;
+        border-radius: 5px;
+        border: solid 1px cornflowerblue;
+        height: 30px;
+    }
+}
+
+.logout-lists {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.registration-form, .login-form {
+    form {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            height: 25px;
+        }
+
+        .button-registration {
+            margin-top: 20px;
+            background: lightblue;
+            border-radius: 5px;
+            border: lightblue;
+            height: 30px;
+            font-size: medium;
+            outline: black;
+        }
+
+        .register-link, .login-link {
+            margin-top: 20px;
+            border: solid 1px lightblue;
+            border-radius: 5px;
+            background-color: lightblue;
+            text-align: center;
+            height: 25px;
+        }
+    }
+}
+
+.error {
+    color: red;
+}
+
+.spinner {
+    display: block;
+    border: 4px solid #d4d4d4;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background: rgba(1, 1, 1, 0.5);
+  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .loader .spinner {
+    width: 20px;
+    height: 20px;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
