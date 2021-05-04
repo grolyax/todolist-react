@@ -5,48 +5,35 @@
       "name": "list 1"
     },
     {
-      "name": "123",
-      "id": 2
-    },
-    {
-      "name": "123",
-      "id": 3
-    },
-    {
       "name": "23",
       "id": 4
     }
   ],
   "tasks": [
     {
-      "name": "123",
-      "listId": "2",
-      "id": 1
-    },
-    {
-      "name": "added",
-      "listId": "2",
-      "id": 2
-    },
-    {
-      "name": "456",
-      "listId": "2",
-      "id": 3
-    },
-    {
-      "name": "dfg",
-      "listId": "2",
-      "id": 4
-    },
-    {
-      "name": "redact",
+      "name": "copy",
       "listId": "1",
       "id": 5
     },
     {
-      "name": "redact",
+      "name": "измена",
       "listId": "1",
       "id": 6
+    },
+    {
+      "name": "проэ",
+      "listId": "4",
+      "id": 7
+    },
+    {
+      "name": "угш",
+      "listId": "4",
+      "id": 8
+    },
+    {
+      "name": "нго",
+      "listId": "4",
+      "id": 9
     }
   ]
 }

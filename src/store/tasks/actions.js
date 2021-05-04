@@ -6,4 +6,4 @@ export const getListTasks = createAsyncThunk(types.GET_LIST_TASKS, (listId) => a
 
 export const addListTask = createAsyncThunk(types.ADD_LIST_TASKS, ({ newTask, listId }) => apiService.post(`list/${listId}/tasks`, newTask));
 
-export const updateListTask = createAsyncThunk(types.UPDATE_LIST_TASK, ({ task }) => apiService.put(`lists/${task.listId}/tasks/${task.id}`, task));
+export const updateListTask = createAsyncThunk(types.UPDATE_LIST_TASK, (task) => apiService.put(`lists/${task.listId}/tasks/${task.id}`, task));
