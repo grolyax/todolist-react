@@ -1,38 +1,49 @@
 {
   "lists": [
     {
-      "id": 1,
-      "name": "list 1"
+      "name": "list 3",
+      "id": 9
     },
     {
-      "name": "23",
-      "id": 4
+      "name": "list 2",
+      "id": 10
     }
   ],
   "tasks": [
     {
-      "name": "copy",
-      "listId": "1",
+      "name": "banana",
+      "checked": false,
+      "listId": "9",
+      "id": 4
+    },
+    {
+      "name": "lemon",
+      "checked": false,
+      "listId": "9",
       "id": 5
     },
     {
-      "name": "измена",
-      "listId": "1",
+      "name": "apple",
+      "checked": false,
+      "listId": "9",
       "id": 6
     },
     {
-      "name": "проэ",
-      "listId": "4",
+      "name": "dog",
+      "checked": false,
+      "listId": "10",
       "id": 7
     },
     {
-      "name": "угш",
-      "listId": "4",
+      "name": "cat",
+      "checked": false,
+      "listId": "10",
       "id": 8
     },
     {
-      "name": "нго",
-      "listId": "4",
+      "name": "homster",
+      "checked": false,
+      "listId": "10",
       "id": 9
     }
   ]

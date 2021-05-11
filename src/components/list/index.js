@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Loader from '../common/loader';
 import AddEntityForm from '../common/add-entity-form';
 import ListOfTasks from './list-of-tasks';
-import EntityType from '../../constants/entity-type';
 
-import { getListTasks, addListTask, updateListTask } from '../../store/tasks/actions';
+import EntityType from '../../constants/entity-type';
+import ActionStatus from '../../constants/action-status';
+
+import {
+  getListTasks,
+  addListTask,
+  updateListTask,
+  deleteListTask,
+  deleteCheckedListTasks
+} from '../../store/tasks/actions';
 
 class List extends Component {
   componentDidMount() {
@@ -14,22 +23,43 @@ class List extends Component {
     getListTasks();
   }
 
+  handleAddListTask = (newTask) => {
+    const { addListTask } = this.props;
+
+    addListTask({ ...newTask, checked: false });
+  }
+
   render() {
-    const { tasks, addListTask, updateListTask } = this.props;
+    const { tasks, updateListTask, status, deleteListTask, deleteCheckedListTasks, } = this.props;
 
     return (
       <>
         <div className="add-form">
-          <AddEntityForm type={EntityType.TASK} onSubmit={addListTask} />
+          <AddEntityForm
+            type={EntityType.TASK}
+            onSubmit={this.handleAddListTask}
+          />
         </div>
 
         <div className="todo-list">
-          <ListOfTasks tasks={tasks} onEdit={updateListTask} />
+          <ListOfTasks
+            tasks={tasks}
+            onEdit={updateListTask}
+            onDelete={deleteListTask}
+          />
         </div>
 
         <div className="delete-checked-wrapper">
-          <button className="delete-checked-btn">Delete Checked</button>
+          <button
+            className="delete-checked-btn"
+            onClick={deleteCheckedListTasks}
+          >
+            Delete Checked
+          </button>
         </div>
+
+        {status === ActionStatus.LOADING && <Loader />}
+
       </>
     );
   }
@@ -43,13 +73,16 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  const { match: { params }
+  const {
+    match: { params },
   } = ownProps;
 
   return {
     getListTasks: () => dispatch(getListTasks(params.id)),
     addListTask: (newTask) => dispatch(addListTask({ newTask, listId: params.id })),
     updateListTask: (task) => dispatch(updateListTask(task)),
+    deleteListTask: (taskId) => dispatch(deleteListTask({ taskId, listId: params.id })),
+    deleteCheckedListTasks: () => dispatch(deleteCheckedListTasks(params.id)),
   };
 }
 

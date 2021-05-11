@@ -15,6 +15,7 @@ export default function lists(state = initialState, action) {
         status: ActionStatus.SUCCEEDED,
       };
     }
+
     case types.REMOVE_LIST_SUCCESS: {
       return {
         ...state,
@@ -23,9 +24,26 @@ export default function lists(state = initialState, action) {
       };
     }
 
+    case types.UPDATE_LIST_SUCCESS: {
+      const updatedList = action.payload;
+
+      return {
+        ...state,
+        status: ActionStatus.SUCCEEDED,
+        lists: state.lists.map((list) => {
+          if (list.id === updatedList.id) {
+            return updatedList;
+          }
+
+          return list;
+        })
+      };
+    }
+
     case types.ADD_LIST_REQUEST:
     case types.REMOVE_LIST_REQUEST:
-    case types.GET_LISTS_REQUEST: {
+    case types.GET_LISTS_REQUEST:
+    case types.UPDATE_LIST_REQUEST: {
       return {
         ...state,
         status: ActionStatus.LOADING,

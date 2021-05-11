@@ -6,10 +6,10 @@ import AddEntityForm from '../common/add-entity-form';
 import ListOfLists from './list-of-lists';
 import Loader from '../common/loader';
 
+import EntityType from '../../constants/entity-type';
 import ActionStatus from '../../constants/action-status';
 
-import { addList, deleteList, getLists } from '../../store/lists/actions';
-import EntityType from '../../constants/entity-type';
+import { addList, deleteList, getLists, updateList } from '../../store/lists/actions';
 
 class Lists extends Component {
   componentDidMount() {
@@ -20,7 +20,7 @@ class Lists extends Component {
 
   render() {
     const {
-      lists, addList, deleteList, status,
+      lists, addList, deleteList, updateList, status,
     } = this.props;
 
     return (
@@ -30,7 +30,11 @@ class Lists extends Component {
         </div>
 
         <div className="lists">
-          <ListOfLists lists={lists} onDelete={deleteList} />
+          <ListOfLists
+            lists={lists}
+            onDelete={deleteList}
+            onEdit={updateList}
+          />
         </div>
 
         {status === ActionStatus.LOADING && <Loader />}
@@ -67,7 +71,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addList: (list) => dispatch(addList(list)),
-    deleteList: (id) => dispatch(deleteList(id)),
+    updateList: (id) => dispatch(updateList(id)),
+    deleteList: (listId) => dispatch(deleteList(listId)),
     getLists: () => dispatch(getLists()),
   };
 }

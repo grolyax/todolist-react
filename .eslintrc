@@ -42,6 +42,7 @@
     "react/self-closing-comp": "warn",
     "react/prefer-stateless-function": "warn",
     "comma-dangle": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

@@ -15,3 +15,9 @@ export const GET_LISTS = 'GET_LISTS';
 export const GET_LISTS_REQUEST = 'GET_LISTS/pending';
 export const GET_LISTS_SUCCESS = 'GET_LISTS/fulfilled';
 export const GET_LISTS_FAILURE = 'GET_LISTS/rejected';
+
+export const UPDATE_LIST = 'UPDATE_LIST';
+
+export const UPDATE_LIST_REQUEST = 'UPDATE_LIST/pending';
+export const UPDATE_LIST_SUCCESS = 'UPDATE_LIST/fulfilled';
+export const UPDATE_LIST_FAILURE = 'UPDATE_LIST/failed';
