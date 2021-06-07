@@ -43,6 +43,7 @@
     "react/prefer-stateless-function": "warn",
     "comma-dangle": "off",
     "object-curly-newline": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "sonarjs/cognitive-complexity": "warn"
   }
 }

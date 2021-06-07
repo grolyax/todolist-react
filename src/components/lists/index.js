@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withAuth0 } from '@auth0/auth0-react';
 import PropTypes from 'prop-types';
 
 import AddEntityForm from '../common/add-entity-form';
@@ -13,20 +14,32 @@ import { addList, deleteList, getLists, updateList } from '../../store/lists/act
 
 class Lists extends Component {
   componentDidMount() {
-    const { getLists } = this.props;
+    const {
+      getLists,
+      auth0: { user },
+    } = this.props;
 
-    getLists();
+    getLists(user.sub);
   }
+
+  handleAddList = (newList) => {
+    const {
+      auth0: { user },
+      addList,
+    } = this.props;
+
+    addList({ ...newList, userId: user.sub });
+  };
 
   render() {
     const {
-      lists, addList, deleteList, updateList, status,
+      lists, deleteList, updateList, status,
     } = this.props;
 
     return (
       <>
         <div className="add-form">
-          <AddEntityForm onSubmit={addList} type={EntityType.LIST} />
+          <AddEntityForm onSubmit={this.handleAddList} type={EntityType.LIST} />
         </div>
 
         <div className="lists">
@@ -73,8 +86,8 @@ function mapDispatchToProps(dispatch) {
     addList: (list) => dispatch(addList(list)),
     updateList: (id) => dispatch(updateList(id)),
     deleteList: (listId) => dispatch(deleteList(listId)),
-    getLists: () => dispatch(getLists()),
+    getLists: (userId) => dispatch(getLists(userId)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Lists);
+export default withAuth0(connect(mapStateToProps, mapDispatchToProps)(Lists));

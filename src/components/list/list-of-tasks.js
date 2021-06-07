@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 import EditEntityInput from '../common/edit-entity-input';
 
 export default class ListOfTasks extends Component {
@@ -49,44 +52,70 @@ export default class ListOfTasks extends Component {
     onEdit({ ...task, checked: !task.checked });
   }
 
+  handleTaskOrderChange = (result) => {
+    const { onReorder } = this.props;
+    if (!result.destination) {
+      return;
+    }
+
+    onReorder({ from: result.source.index + 1, to: result.destination.index + 1 });
+  }
+
   render() {
     const { tasks, onDelete } = this.props;
     const { editTaskId } = this.state;
 
     return (
-      <ol>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <input
-              type="checkbox"
-              defaultChecked={task.checked}
-              onChange={() => this.handleTaskCheck(task.id)}
-            />
-
-            {editTaskId === task.id ? (
-              <EditEntityInput
-                value={task.name}
-                onEdit={this.handleEdit}
-                ref={this.editEntityInput}
-              />
-            ) : (<span>{task.name}</span>)}
-
-            <button
-              className="edit-btn"
-              onClick={() => this.handleEditButtonClick(task.id)}
+      <DragDropContext onDragEnd={this.handleTaskOrderChange}>
+        <Droppable droppableId="droppable">
+          {(provided) => (
+            <ol
+              ref={provided.innerRef}
+              {...provided.droppableProps}
             >
-              <i className="fa fa-edit" aria-hidden="true" />
-            </button>
+              {tasks.map((task, index) => (
+                <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
+                  {(provided) => (
+                    <li
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <input
+                        type="checkbox"
+                        defaultChecked={task.checked}
+                        onChange={() => this.handleTaskCheck(task.id)}
+                      />
 
-            <button
-              className="delete-btn"
-              onClick={() => onDelete(task.id)}
-            >
-              <i className="fa fa-trash" />
-            </button>
-          </li>
-        ))}
-      </ol>
+                      {editTaskId === task.id ? (
+                        <EditEntityInput
+                          value={task.name}
+                          onEdit={this.handleEdit}
+                          ref={this.editEntityInput}
+                        />
+                      ) : (<span>{task.name}</span>)}
+
+                      <button
+                        className="edit-btn"
+                        onClick={() => this.handleEditButtonClick(task.id)}
+                      >
+                        <i className="fa fa-edit" aria-hidden="true" />
+                      </button>
+
+                      <button
+                        className="delete-btn"
+                        onClick={() => onDelete(task.id)}
+                      >
+                        <i className="fa fa-trash" />
+                      </button>
+                    </li>
+                  )}
+                </Draggable>
+              ))}
+            </ol>
+          )}
+        </Droppable>
+      </DragDropContext>
     );
   }
 }

@@ -8,7 +8,7 @@ export const addList = createAsyncThunk(types.ADD_LIST, (list) => apiService.pos
 
 export const updateList = createAsyncThunk(
   types.UPDATE_LIST,
-  (list) => apiService.put(`list/${list.id}`, list)
+  (list) => apiService.put(`lists/${list.id}`, list)
 );
 
 export const deleteList = createAsyncThunk(types.REMOVE_LIST, async (id) => {

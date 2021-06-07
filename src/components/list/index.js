@@ -13,8 +13,10 @@ import {
   addListTask,
   updateListTask,
   deleteListTask,
-  deleteCheckedListTasks
+  deleteCheckedListTasks,
+  reorderListTasks
 } from '../../store/tasks/actions';
+import { getLastOrder } from '../../utils';
 
 class List extends Component {
   componentDidMount() {
@@ -24,13 +26,24 @@ class List extends Component {
   }
 
   handleAddListTask = (newTask) => {
-    const { addListTask } = this.props;
+    const { addListTask, tasks } = this.props;
 
-    addListTask({ ...newTask, checked: false });
+    const order = getLastOrder(tasks);
+
+    addListTask({ ...newTask, checked: false, order });
   }
 
   render() {
-    const { tasks, updateListTask, status, deleteListTask, deleteCheckedListTasks, } = this.props;
+    const {
+      tasks,
+      updateListTask,
+      status,
+      deleteListTask,
+      deleteCheckedListTasks,
+      reorderListTasks,
+    } = this.props;
+
+    const sortedTask = [...tasks].sort((a, b) => a.order - b.order);
 
     return (
       <>
@@ -43,9 +56,10 @@ class List extends Component {
 
         <div className="todo-list">
           <ListOfTasks
-            tasks={tasks}
+            tasks={sortedTask}
             onEdit={updateListTask}
             onDelete={deleteListTask}
+            onReorder={reorderListTasks}
           />
         </div>
 
@@ -83,6 +97,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     updateListTask: (task) => dispatch(updateListTask(task)),
     deleteListTask: (taskId) => dispatch(deleteListTask({ taskId, listId: params.id })),
     deleteCheckedListTasks: () => dispatch(deleteCheckedListTasks(params.id)),
+    reorderListTasks: ({ from, to }) => dispatch(reorderListTasks({ listId: params.id, from, to })),
   };
 }
 

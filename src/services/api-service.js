@@ -1,6 +1,16 @@
 import HttpMethod from '../constants/http-method';
 import ContentType from '../constants/content-type';
 
+function getAuthToken() {
+  const token = localStorage.getItem(
+    `@@auth0spajs@@::${process.env.REACT_APP_AUTH0_CLIENT_ID}::default::openid profile email`
+  );
+
+  const parsedToken = JSON.parse(token);
+
+  return parsedToken.body.id_token;
+}
+
 class ApiService {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
@@ -9,6 +19,9 @@ class ApiService {
   async get(url) {
     const response = await fetch(`${this.baseUrl}/${url}`, {
       method: HttpMethod.GET,
+      headers: {
+        Authorization: getAuthToken(),
+      }
     });
 
     if (!response.ok) {
@@ -37,6 +50,9 @@ class ApiService {
   async delete(url) {
     const response = await fetch(`${this.baseUrl}/${url}`, {
       method: HttpMethod.DELETE,
+      headers: {
+        Authorization: getAuthToken(),
+      }
     });
 
     if (!response.ok) {

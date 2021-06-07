@@ -39,3 +39,12 @@ export const deleteCheckedListTasks = createAsyncThunk(
     return checkedTasks.map((task) => task.id);
   }
 );
+
+export const reorderListTasks = createAsyncThunk(
+  types.REORDER_LIST_TASKS,
+  async ({ from, to, listId }) => {
+    await apiService.post(`lists/${listId}/reorder-tasks?from=${from}&to=${to}`);
+
+    return { from, to };
+  }
+);

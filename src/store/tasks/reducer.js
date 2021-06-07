@@ -7,7 +7,7 @@ const initialState = {
   status: ActionStatus.IDLE,
 };
 
-export default function task(state = initialState, action) {
+export default function tasks(state = initialState, action) {
   switch (action.type) {
     case types.ADD_LIST_TASK_SUCCESS: {
       return {
@@ -65,6 +65,31 @@ export default function task(state = initialState, action) {
         ...state,
         tasks: action.payload,
         status: ActionStatus.SUCCEEDED,
+      };
+    }
+
+    case types.REORDER_LIST_TASKS_SUCCESS: {
+      const { from, to } = action.payload;
+
+      const delta = from < to ? -1 : 1;
+      return {
+        ...state,
+        status: ActionStatus.SUCCEEDED,
+        tasks: state.tasks.map((task) => {
+          if (task.order === from) {
+            return { ...task, order: to };
+          }
+
+          if (delta === -1) {
+            if (task.order > from && task.order <= to) {
+              return { ...task, order: task.order + delta };
+            }
+          } else if (task.order < from && task.order >= to) {
+            return { ...task, order: task.order + delta };
+          }
+
+          return task;
+        }),
       };
     }
 
